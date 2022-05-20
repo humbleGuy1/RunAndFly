@@ -13,6 +13,6 @@ public class MaterialOffsetChanger : MonoBehaviour
     private void Start()
     {
         _meshRenderer = GetComponent<MeshRenderer>();
-        _meshRenderer.material.DOOffset(new Vector2(0, _yOffset), _duration).SetLoops(-1,LoopType.Restart);
+        _meshRenderer.material.DOOffset(new Vector2(0, _yOffset), _duration).SetLoops(-1, LoopType.Restart);
     }
 }

@@ -2,15 +2,21 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private float _gems;
+    [SerializeField] private ParticleSystem _takeGemEffect;
+
+    private void TakeGem()
     {
-        
+        _gems++;
+        _takeGemEffect.Play();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if(other.TryGetComponent(out Gem gem))
+        {
+            TakeGem();
+            Destroy(gem.gameObject);
+        }
     }
 }
