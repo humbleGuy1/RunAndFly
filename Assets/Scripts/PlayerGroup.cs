@@ -13,6 +13,8 @@ public class PlayerGroup : MonoBehaviour
     public List<Player> Players => _players;
 
     public event UnityAction NumberOfPlayersChanged;
+    public event UnityAction<Player> CameraTargetChanged;
+    public event UnityAction CameraMotionStopped;
 
     private void Start()
     {
@@ -24,7 +26,7 @@ public class PlayerGroup : MonoBehaviour
     {
         foreach (var player in _players)
         {
-            if(player.isActiveAndEnabled == false)
+            if (player.isActiveAndEnabled == false)
             {
                 player.gameObject.SetActive(true);
                 break;
@@ -46,6 +48,8 @@ public class PlayerGroup : MonoBehaviour
         var follower = _players[0].GetComponent<Follower>();
         follower.enabled = false;
 
+        CameraTargetChanged?.Invoke(_players[0]);
+        CameraMotionStopped?.Invoke();
         NumberOfPlayersChanged?.Invoke();
     }
 }
