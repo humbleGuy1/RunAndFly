@@ -62,7 +62,7 @@ Material:
     - _DirectionPitch: 0
     - _DirectionYaw: 0
     - _DstBlend: 0
-    - _Exponent: 1.16
+    - _Exponent: 0.53
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1

@@ -475,6 +475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gems: 0
   _takeGemEffect: {fileID: 1526375484152650475}
+  _playerGroup: {fileID: 0}
 --- !u!114 &8552093284689221713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -487,8 +488,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68154f0c295f3804f85cf1bcd5f814fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 14
-  _sideShiftSpeed: 10
+  _speed: 16
+  _sideShiftSpeed: 14
 --- !u!114 &1931951821755006277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -514,7 +515,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0348f1b4b6738cf42b401ac7528c630d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _jumpForce: 0
+  _range: 4
+  _jumpForce: 32.08
+  _duration: 15
 --- !u!1 &4532756333456762366
 GameObject:
   m_ObjectHideFlags: 0

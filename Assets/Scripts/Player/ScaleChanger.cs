@@ -18,11 +18,12 @@ public class ScaleChanger : MonoBehaviour
     private IEnumerator Changing(List<Player> players)
     {
         var waitForSeconds = new WaitForSeconds(_delayBetweenPlayers);
+        int secondPlayerInGroup = 1;
 
-        foreach (var player in players)
+        for(int i = secondPlayerInGroup; i < players.Count; i++)
         {
-            player.transform.DOScale(_targetScale, _duration);
-            player.transform.DOScale(_startScale, _duration);
+            players[i].transform.DOScale(_targetScale, _duration);
+            players[i].transform.DOScale(_startScale, _duration);
             yield return waitForSeconds;
         }
     }

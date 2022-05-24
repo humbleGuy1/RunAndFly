@@ -7,14 +7,15 @@ using UnityEngine;
 public class PlayerGroup : MonoBehaviour
 {
     [SerializeField] private List<Player> _players;
+    [SerializeField] private Vector3 _leadPlayerTargetScale;
+    [SerializeField] protected ParticleSystem _exposionEffect;
     
     private ScaleChanger _scaleChanger;
    
     public List<Player> Players => _players;
 
     public event UnityAction NumberOfPlayersChanged;
-    public event UnityAction<Player> CameraTargetChanged;
-    public event UnityAction CameraMotionStopped;
+    public event UnityAction<Player> CameraMotionStopped;
 
     private void Start()
     {
@@ -39,17 +40,22 @@ public class PlayerGroup : MonoBehaviour
 
     public void Remove()
     {
-        _players[0].gameObject.SetActive(false);
+        var leadPlayer = _players[0];
+
+        Instantiate(_exposionEffect, leadPlayer.transform);
+        leadPlayer.gameObject.SetActive(false);
         _players.RemoveAt(0);
 
-        var mover = _players[0].GetComponent<PlayerMover>();
+        leadPlayer = _players[0];
+
+        var mover = leadPlayer.GetComponent<PlayerMover>();
         mover.enabled = true;
 
-        var follower = _players[0].GetComponent<Follower>();
+        var follower = leadPlayer.GetComponent<Follower>();
         follower.enabled = false;
+        leadPlayer.transform.localScale = _leadPlayerTargetScale;
 
-        CameraTargetChanged?.Invoke(_players[0]);
-        CameraMotionStopped?.Invoke();
+        CameraMotionStopped?.Invoke(leadPlayer);
         NumberOfPlayersChanged?.Invoke();
     }
 }

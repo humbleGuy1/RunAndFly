@@ -5,23 +5,22 @@ public class DestroyableObstacle : MonoBehaviour
 {
     [SerializeField] private int _requiredNumberToDestroy;
 
-    private TMP_Text _number;
-    private int _destroyedPlayers;
+    private TMP_Text _displayedNumber;
 
     private void Start()
     {
-        _number = GetComponentInChildren<TMP_Text>();
-        _number.text = _requiredNumberToDestroy.ToString();
-        _destroyedPlayers = 0;
+        _displayedNumber = GetComponentInChildren<TMP_Text>();
+        _displayedNumber.text = _requiredNumberToDestroy.ToString();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.TryGetComponent(out Player _))
         {
-            _destroyedPlayers++;
+            _requiredNumberToDestroy--;
+            _displayedNumber.text = _requiredNumberToDestroy.ToString();
 
-            if(_destroyedPlayers == _requiredNumberToDestroy)
+            if (_requiredNumberToDestroy == 0)
             {
                 Destroy(gameObject);
             }
