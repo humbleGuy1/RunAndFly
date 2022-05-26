@@ -4,6 +4,7 @@ public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _sideShiftSpeed;
+    [SerializeField] private float _flyingSpeedMultiplier;
 
     private void Update()
     {
@@ -22,6 +23,19 @@ public class PlayerMover : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             transform.Translate(_sideShiftSpeed * Time.deltaTime * Vector3.right, Space.World);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.TryGetComponent(out FlyTrigger _))
+        {
+            _speed *= _flyingSpeedMultiplier;
+        }
+
+        if (other.TryGetComponent(out RunTrigger _))
+        {
+            _speed /= _flyingSpeedMultiplier;
         }
     }
 }

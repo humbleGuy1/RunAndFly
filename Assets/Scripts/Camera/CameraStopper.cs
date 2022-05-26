@@ -20,7 +20,6 @@ public class CameraStopper : MonoBehaviour
 
     private void OnMotionStopped(Player player)
     {
-        Debug.Log("Stopped");
         _camera.Follow = player.transform;
 
         if (_coroutine != null)
@@ -29,7 +28,6 @@ public class CameraStopper : MonoBehaviour
         }
 
         _coroutine = StartCoroutine(StopMotion(player));
-
     }
 
     private IEnumerator StopMotion(Player player)

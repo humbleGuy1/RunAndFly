@@ -8,7 +8,8 @@ public class PlayerGroup : MonoBehaviour
 {
     [SerializeField] private List<Player> _players;
     [SerializeField] private Vector3 _leadPlayerTargetScale;
-    [SerializeField] protected ParticleSystem _exposionEffect;
+    [SerializeField] private ParticleSystem _exposionEffect;
+    [SerializeField] private PlayerCounter _playerCounter;
     
     private ScaleChanger _scaleChanger;
    
@@ -19,6 +20,7 @@ public class PlayerGroup : MonoBehaviour
 
     private void Start()
     {
+        _playerCounter.transform.SetParent(_players[0].transform, false);
         _scaleChanger = GetComponent<ScaleChanger>();
         NumberOfPlayersChanged?.Invoke();
     }
@@ -42,20 +44,35 @@ public class PlayerGroup : MonoBehaviour
     {
         var leadPlayer = _players[0];
 
-        Instantiate(_exposionEffect, leadPlayer.transform);
-        leadPlayer.gameObject.SetActive(false);
+        ActivateEffect(_exposionEffect,leadPlayer);
+
+        _playerCounter.transform.SetParent(_players[1].transform, false);
+
         _players.RemoveAt(0);
+        Destroy(leadPlayer.gameObject);
 
         leadPlayer = _players[0];
+        SwitchControllTo(leadPlayer);
 
-        var mover = leadPlayer.GetComponent<PlayerMover>();
-        mover.enabled = true;
-
-        var follower = leadPlayer.GetComponent<Follower>();
-        follower.enabled = false;
         leadPlayer.transform.localScale = _leadPlayerTargetScale;
 
         CameraMotionStopped?.Invoke(leadPlayer);
         NumberOfPlayersChanged?.Invoke();
+    }
+
+    private void ActivateEffect(ParticleSystem effect, Player player)
+    {
+        var renderer = player.GetComponentInChildren<SkinnedMeshRenderer>();
+        Vector3 center = renderer.bounds.center;
+        Instantiate(effect, center, player.transform.rotation);
+    }
+
+    private void SwitchControllTo(Player player)
+    {
+        var mover = player.GetComponent<PlayerMover>();
+        mover.enabled = true;
+
+        var follower = player.GetComponent<Follower>();
+        follower.enabled = false;
     }
 }

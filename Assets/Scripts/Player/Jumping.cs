@@ -5,7 +5,6 @@ using DG.Tweening;
 
 public class Jumping : MonoBehaviour
 {
-    [SerializeField] private Transform _endValue;
     [SerializeField] private float _jumpHeight;
     [SerializeField] private float _duration;
 
@@ -18,11 +17,13 @@ public class Jumping : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject.TryGetComponent(out Springboard _))
+        int numberOfJums = 1;
+
+        if(other.TryGetComponent(out JumpTrigger trigger))
         {
-            transform.DOJump(_endValue.position, _jumpHeight, 1, _duration).SetEase(Ease.Linear);
+            transform.DOJump(trigger.EndValue.position, _jumpHeight, numberOfJums, _duration).SetEase(Ease.Linear);
             _animator.Play(Jump);
         }
     }
