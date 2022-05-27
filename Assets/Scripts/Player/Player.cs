@@ -4,6 +4,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private ParticleSystem _takeGemEffect;
     [SerializeField] private ParticleSystem _takeKeyEffect;
+    [SerializeField] private ParticleSystem _takeBaloonEffect;
     [SerializeField] private PlayerGroup _playerGroup;
 
     private void TakeGem()
@@ -40,6 +41,13 @@ public class Player : MonoBehaviour
         if (other.TryGetComponent(out DestroyableObstacle _))
         {
             _playerGroup.Remove();
+        }
+
+        if(other.TryGetComponent(out Baloon baloon))
+        {
+            _takeGemEffect.Play();
+            _takeBaloonEffect.Play();
+            Destroy(baloon.gameObject);
         }
     }
 }

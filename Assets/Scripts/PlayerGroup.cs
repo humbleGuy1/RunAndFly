@@ -20,8 +20,8 @@ public class PlayerGroup : MonoBehaviour
 
     private void Start()
     {
-        _playerCounter.transform.SetParent(_players[0].transform, false);
         _scaleChanger = GetComponent<ScaleChanger>();
+        _playerCounter.transform.SetParent(_players[0].transform, false);
         NumberOfPlayersChanged?.Invoke();
     }
 

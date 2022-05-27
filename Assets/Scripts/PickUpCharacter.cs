@@ -6,7 +6,7 @@ public class PickUpCharacter : MonoBehaviour
     {
         if(other.TryGetComponent(out Player _))
         {
-            Debug.Log("sad");
+            print("sad");
         }
     }
 }
