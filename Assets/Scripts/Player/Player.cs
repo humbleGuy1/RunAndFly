@@ -2,33 +2,22 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private PlayerGroup _playerGroup;
     [SerializeField] private ParticleSystem _takeGemEffect;
     [SerializeField] private ParticleSystem _takeKeyEffect;
     [SerializeField] private ParticleSystem _takeBaloonEffect;
-    [SerializeField] private PlayerGroup _playerGroup;
-
-    private void TakeGem()
-    {
-        _takeGemEffect.Play();
-    }
-
-    private void TakeKey()
-    {
-        Debug.Log("Take");
-        _takeKeyEffect.Play();
-    }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.TryGetComponent(out Gem gem))
         {
-            TakeGem();
+            _takeGemEffect.Play();
             Destroy(gem.gameObject);
         }
 
         if (other.TryGetComponent(out Key key))
         {
-            TakeKey();
+            _takeKeyEffect.Play();
             Destroy(key.gameObject);
         }
 
@@ -40,14 +29,16 @@ public class Player : MonoBehaviour
 
         if (other.TryGetComponent(out DestroyableObstacle _))
         {
-            _playerGroup.Remove();
+            _playerGroup.RemoveFirst();
         }
 
         if(other.TryGetComponent(out Baloon baloon))
         {
             _takeGemEffect.Play();
             _takeBaloonEffect.Play();
-            Destroy(baloon.gameObject);
+            baloon.gameObject.SetActive(false);
+            _playerGroup.RemoveLast();
         }
+
     }
 }

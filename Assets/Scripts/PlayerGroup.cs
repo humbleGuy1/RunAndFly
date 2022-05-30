@@ -8,7 +8,7 @@ public class PlayerGroup : MonoBehaviour
 {
     [SerializeField] private List<Player> _players;
     [SerializeField] private Vector3 _leadPlayerTargetScale;
-    [SerializeField] private ParticleSystem _exposionEffect;
+    [SerializeField] private ParticleSystem _explosionEffect;
     [SerializeField] private PlayerCounter _playerCounter;
     
     private ScaleChanger _scaleChanger;
@@ -16,7 +16,10 @@ public class PlayerGroup : MonoBehaviour
     public List<Player> Players => _players;
 
     public event UnityAction NumberOfPlayersChanged;
+    public event UnityAction<Player> PlayerWithGemCreated;
     public event UnityAction<Player> CameraMotionStopped;
+    public event UnityAction<Player> MinusOneTextShowed;
+    public event UnityAction<Player> PlusOneTextShowed;
 
     private void Start()
     {
@@ -38,13 +41,14 @@ public class PlayerGroup : MonoBehaviour
 
         NumberOfPlayersChanged?.Invoke();
         _scaleChanger.Change(_players);
+        PlusOneTextShowed?.Invoke(_players[0]);
     }
 
-    public void Remove()
+    public void RemoveFirst()
     {
         var leadPlayer = _players[0];
 
-        ActivateEffect(_exposionEffect,leadPlayer);
+        ActivateEffect(_explosionEffect,leadPlayer);
 
         _playerCounter.transform.SetParent(_players[1].transform, false);
 
@@ -53,10 +57,44 @@ public class PlayerGroup : MonoBehaviour
 
         leadPlayer = _players[0];
         SwitchControllTo(leadPlayer);
+        MinusOneTextShowed?.Invoke(leadPlayer);
 
         leadPlayer.transform.localScale = _leadPlayerTargetScale;
 
         CameraMotionStopped?.Invoke(leadPlayer);
+        NumberOfPlayersChanged?.Invoke();
+    }
+
+    public void RemoveLast()
+    {
+        int activePlayersCounter = 0;
+
+        foreach(var player in _players)
+        {
+            if(player.isActiveAndEnabled == true)
+            {
+                activePlayersCounter++;
+            }
+        }
+
+        if(activePlayersCounter == 1)
+        {
+
+        }
+        else
+        {
+            for (int i = _players.Count - 1; i >= 0; i--)
+            {
+                if (_players[i].isActiveAndEnabled == true)
+                {
+                    _players[i].gameObject.SetActive(false);
+                    break;
+                }
+            }
+
+            PlayerWithGemCreated?.Invoke(_players[0]);
+        }
+
         NumberOfPlayersChanged?.Invoke();
     }
 

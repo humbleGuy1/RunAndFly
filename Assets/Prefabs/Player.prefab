@@ -480,6 +480,9 @@ MonoBehaviour:
   _takeKeyEffect: {fileID: 4291809507536755274, guid: 4ece13dafc338b842b4c93868be9a304, type: 3}
   _takeBaloonEffect: {fileID: 4366752796558271469}
   _playerGroup: {fileID: 0}
+  _plusOnePrefab: {fileID: 4149281775919258305, guid: d6c8e26b325d28046910152968d0d4bc, type: 3}
+  _minusOnePrefab: {fileID: 4149281775919258305, guid: 72e7af49c98f4414ab98da704fdd05de, type: 3}
+  _textPoint: {fileID: 0}
 --- !u!114 &8552093284689221713
 MonoBehaviour:
   m_ObjectHideFlags: 0
