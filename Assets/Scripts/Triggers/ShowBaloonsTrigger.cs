@@ -31,6 +31,8 @@ public class ShowBaloonsTrigger : MonoBehaviour
 
     private IEnumerator Show()
     {
+        var waitForSeconds = new WaitForSeconds(0.8f);
+
         foreach (var baloon in _baloons)
         {
             baloon.gameObject.SetActive(true);
@@ -47,7 +49,7 @@ public class ShowBaloonsTrigger : MonoBehaviour
             baloonRenderer.material.DOFade(1, _duration);
             number.DOFade(1, _duration);
 
-            yield return new WaitUntil(() => baloon == null);
+            yield return waitForSeconds;
         }
     }
 }

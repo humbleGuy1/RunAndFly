@@ -89,6 +89,8 @@ public class PlayerGroup : MonoBehaviour
             PlayersWithGemsMovedToPoints?.Invoke();
             var text = _playerCounter.GetComponentInChildren<TMP_Text>();
             text.text = "0";
+            _playerCounter.gameObject.SetActive(false);
+            
         }
         else
         {
@@ -126,6 +128,14 @@ public class PlayerGroup : MonoBehaviour
     {
         var mover = player.GetComponent<PlayerMover>();
         mover.enabled = false;
+
+        var animator = player.GetComponent<Animator>();
+        animator.Play("TakeGem");
+        player.transform.rotation = Quaternion.Euler(40f, 0, 0);
+
+        var gem = player.transform.Find("GemOutline").GetComponent<Gem>();
+        gem.gameObject.SetActive(true);
+
         float duration = 3f;
         player.transform.DOMove(_finishPlatform.CentralPoint.position, duration);
     }

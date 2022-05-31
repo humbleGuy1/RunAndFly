@@ -986,6 +986,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 753342627508154449}
     m_Modifications:
+    - target: {fileID: 4291809507536755274, guid: e22c575d7aa3f6f4ebc8e4d9eba6ab47, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4291809507536755275, guid: e22c575d7aa3f6f4ebc8e4d9eba6ab47, type: 3}
       propertyPath: m_Name
       value: GemSpriteEffect
