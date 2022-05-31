@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class Creator : MonoBehaviour
+public class Spawner : MonoBehaviour
 {
     [SerializeField] private PlayerGroup _playerGroup;
     [SerializeField] private PlayerWithGem _playerWithGem;
 
     private void OnPlayerWithGemCreated(Player player)
     {
-        Instantiate(_playerWithGem, player.transform.position, Quaternion.Euler(40,0,0));
+        Instantiate(_playerWithGem, player.transform.position, Quaternion.identity);
     }
 
     private void OnEnable()

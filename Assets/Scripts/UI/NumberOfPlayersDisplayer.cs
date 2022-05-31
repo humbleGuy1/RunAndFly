@@ -10,9 +10,9 @@ public class NumberOfPlayersDisplayer : MonoBehaviour
     {
         int activePlayerCount = 0;
 
-        foreach(var player in _playerGroup.Players)
+        foreach (var player in _playerGroup.Players)
         {
-            if(player.isActiveAndEnabled)
+            if (player.isActiveAndEnabled)
             {
                 activePlayerCount++;
             }

@@ -858,13 +858,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa9bca24090835a459a50eddeb7a2b49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerGroup: {fileID: 0}
   _takeGemEffect: {fileID: 6624361166288332141}
   _takeKeyEffect: {fileID: 4291809507536755274, guid: 4ece13dafc338b842b4c93868be9a304, type: 3}
   _takeBaloonEffect: {fileID: 1337475496527918949}
-  _playerGroup: {fileID: 0}
-  _plusOnePrefab: {fileID: 4149281775919258305, guid: d6c8e26b325d28046910152968d0d4bc, type: 3}
-  _minusOnePrefab: {fileID: 4149281775919258305, guid: 72e7af49c98f4414ab98da704fdd05de, type: 3}
-  _textPoint: {fileID: 0}
 --- !u!114 &4066627869138036695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -905,8 +902,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0348f1b4b6738cf42b401ac7528c630d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _jumpHeight: 0
-  _duration: 15
+  _jumpHeight: 5
+  _duration: 1.5
 --- !u!114 &4509386045081875708
 MonoBehaviour:
   m_ObjectHideFlags: 0

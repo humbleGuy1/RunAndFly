@@ -12,6 +12,8 @@ public class ShowBaloonsTrigger : MonoBehaviour
     [SerializeField] protected float _duration;
 
     private BoxCollider _boxCollider;
+    private const string Rope = "Rope";
+    private const string Sphere = "Sphere";
 
     private void Start()
     {
@@ -33,8 +35,8 @@ public class ShowBaloonsTrigger : MonoBehaviour
         {
             baloon.gameObject.SetActive(true);
 
-            var ropeRenderer = baloon.transform.Find("Circle").GetComponent<MeshRenderer>();
-            var baloonRenderer = baloon.transform.Find("Sphere").GetComponent<MeshRenderer>();
+            var ropeRenderer = baloon.transform.Find(Rope).GetComponent<MeshRenderer>();
+            var baloonRenderer = baloon.transform.Find(Sphere).GetComponent<MeshRenderer>();
             var number = baloon.GetComponentInChildren<TMP_Text>();
 
             ropeRenderer.material.DOFade(0, 0);
@@ -45,7 +47,7 @@ public class ShowBaloonsTrigger : MonoBehaviour
             baloonRenderer.material.DOFade(1, _duration);
             number.DOFade(1, _duration);
 
-            yield return new WaitUntil(() => baloon.isActiveAndEnabled == false);
+            yield return new WaitUntil(() => baloon == null);
         }
     }
 }

@@ -9,22 +9,19 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent(out Gem gem))
+        if(other.TryGetComponent(out Gem _))
         {
             _takeGemEffect.Play();
-            Destroy(gem.gameObject);
         }
 
-        if (other.TryGetComponent(out Key key))
+        if (other.TryGetComponent(out Key _))
         {
             _takeKeyEffect.Play();
-            Destroy(key.gameObject);
         }
 
-        if (other.TryGetComponent(out PickUpCharacter character))
+        if (other.TryGetComponent(out PickUpCharacter _))
         {
             _playerGroup.Add();
-            Destroy(character.gameObject);
         }
 
         if (other.TryGetComponent(out DestroyableObstacle _))
@@ -39,6 +36,5 @@ public class Player : MonoBehaviour
             baloon.gameObject.SetActive(false);
             _playerGroup.RemoveLast();
         }
-
     }
 }

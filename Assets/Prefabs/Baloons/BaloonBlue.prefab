@@ -324,7 +324,7 @@ GameObject:
   - component: {fileID: 1394930773712660501}
   - component: {fileID: 6058784838827980056}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
