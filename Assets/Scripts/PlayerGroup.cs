@@ -16,6 +16,9 @@ public class PlayerGroup : MonoBehaviour
     [SerializeField] private FinishPlatform _finishPlatform;
     
     private ScaleChanger _scaleChanger;
+
+    private const string TakeGem = "TakeGem";
+    private const string GemOutline = "GemOutline";
    
     public List<Player> Players => _players;
 
@@ -87,10 +90,7 @@ public class PlayerGroup : MonoBehaviour
             _finishPlatform.gameObject.SetActive(true);
             MoveLeadPlayerToCenterOfFinishPlatform(_players[0]);
             PlayersWithGemsMovedToPoints?.Invoke();
-            var text = _playerCounter.GetComponentInChildren<TMP_Text>();
-            text.text = "0";
             _playerCounter.gameObject.SetActive(false);
-            
         }
         else
         {
@@ -130,10 +130,10 @@ public class PlayerGroup : MonoBehaviour
         mover.enabled = false;
 
         var animator = player.GetComponent<Animator>();
-        animator.Play("TakeGem");
+        animator.Play(TakeGem);
         player.transform.rotation = Quaternion.Euler(40f, 0, 0);
 
-        var gem = player.transform.Find("GemOutline").GetComponent<Gem>();
+        var gem = player.transform.Find(GemOutline).GetComponent<Gem>();
         gem.gameObject.SetActive(true);
 
         float duration = 3f;

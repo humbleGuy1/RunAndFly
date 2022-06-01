@@ -24,12 +24,12 @@ public class ShowBaloonsTrigger : MonoBehaviour
     {
         if(other.TryGetComponent(out Player _))
         {
-            StartCoroutine(Show());
+            StartCoroutine(ShowInTurn());
             _boxCollider.enabled = false;
         }
     }
 
-    private IEnumerator Show()
+    private IEnumerator ShowInTurn()
     {
         var waitForSeconds = new WaitForSeconds(0.8f);
 

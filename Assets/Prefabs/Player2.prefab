@@ -918,8 +918,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 5269851915517727498}
-  _value: 5
-  _valueModifier: 2
+  _followSpeed: 5
+  _followSpeedModifier: 2
 --- !u!114 &1142858841162515824
 MonoBehaviour:
   m_ObjectHideFlags: 0
