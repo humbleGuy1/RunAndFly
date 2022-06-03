@@ -432,7 +432,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 25
-  _sideSpeed: 15
+  _sideSpeed: 12
   _downSpeed: 4
 --- !u!1 &4532756333456762366
 GameObject:
